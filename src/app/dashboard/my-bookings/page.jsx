@@ -1,30 +1,47 @@
 
 
+
+
 "use client";
 
 import React, { useEffect, useState } from 'react';
 import { authClient } from '@/lib/auth-client';
 import { Button } from '@heroui/react';
-
 import { DeleteBooking } from '@/components/DeleteBooking';
 import UpdateBooking from '@/components/UpdateBooking';
 
 const MyBookingsPage = () => {
     const { data: session, isPending } = authClient.useSession();
     const [bookings, setBookings] = useState([]);
+    const [isLoadingBookings, setIsLoadingBookings] = useState(false);
 
     useEffect(() => {
         const fetchBookings = async () => {
-            if (session?.user?.id) {
-                try {
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${session.user.id}`, {
-                        cache: 'no-store'
-                    });
+            if (!session?.user?.id) return;
+            
+            setIsLoadingBookings(true);
+            try {
+                
+                const tokenResponse = await authClient.token();
+                const token = tokenResponse?.data?.token;
+
+            
+                const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${session.user.id}`, {
+                    method: "GET", 
+                    headers: {
+                        'content-type': 'application/json',
+                        'authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (res.ok) {
                     const data = await res.json();
                     setBookings(data);
-                } catch (error) {
-                    console.error("Error fetching bookings:", error);
                 }
+            } catch (error) {
+                console.error("Error fetching bookings:", error);
+            } finally {
+                setIsLoadingBookings(false);
             }
         };
 
@@ -33,19 +50,10 @@ const MyBookingsPage = () => {
         }
     }, [session, isPending]);
 
-
-    if (isPending) return null;
-    if (!session?.user) {
-        return (
-            <div className='text-center mt-10'>
-                <p className='text-red-500 font-medium'>Please log in to view your bookings.</p>
-            </div>
-        );
-    }
-
+    if (isPending || isLoadingBookings) return <p className="text-center p-10">Loading...</p>;
+    
     return (
         <div className='w-full'>
-            
             {bookings.length === 0 ? (
                 <div className="bg-white p-12 text-center rounded-2xl border border-dashed border-gray-300">
                     <p className="text-gray-400">You haven't booked any appointments yet.</p>
@@ -65,23 +73,18 @@ const MyBookingsPage = () => {
                                         <span className="text-gray-400">Patient:</span> 
                                         <span className="font-medium text-gray-700">{booking.patientName}</span>
                                     </p>
-                                    
                                     <p className="flex items-center gap-1">
                                         <span className="text-gray-400">Date:</span> 
                                         <span className="font-medium text-gray-700">
                                             {booking.appointmentDate ? new Date(booking.appointmentDate).toLocaleDateString("en-US", {
-                                                year: "numeric",
-                                                month: "long",
-                                                day: "numeric"
+                                                year: "numeric", month: "long", day: "numeric"
                                             }) : "N/A"}
                                         </span>
                                     </p>
-                                    
                                     <p className="flex items-center gap-1">
                                         <span className="text-gray-400">Time:</span> 
                                         <span className="font-medium text-gray-700">{booking.appointmentTime}</span>
                                     </p>
-                                    
                                     <p className="flex items-start gap-1">
                                         <span className="text-gray-400">Reason:</span> 
                                         <span className="font-medium text-gray-700 italic">"{booking.reason || "N/A"}"</span>
@@ -90,7 +93,7 @@ const MyBookingsPage = () => {
                             </div>
 
                             <div className='flex items-center gap-3 mt-6 pt-4 border-t border-gray-100'>
-                                 <UpdateBooking booking={booking} /> 
+                                <UpdateBooking booking={booking} /> 
                                 <DeleteBooking bookingId={booking._id} />
                             </div> 
                         </div>

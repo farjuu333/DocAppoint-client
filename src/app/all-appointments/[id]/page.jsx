@@ -1,9 +1,8 @@
- 
-
- 
-import BookingTriggerSection from '@/components/BookingTriggerSection';
+ import BookingTriggerSection from '@/components/BookingTriggerSection';
+import { auth } from '@/lib/auth';
 import { Book } from '@gravity-ui/icons';
 import { Button } from '@heroui/react';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import React from 'react';
 import { FaRegCalendar, FaBriefcase, FaHospital, FaDollarSign } from 'react-icons/fa';
@@ -11,8 +10,15 @@ import { LuMapPin } from 'react-icons/lu';
 
 const DoctorDetailsPage = async ({ params }) => {
     const { id } = await params;
+    const {token} = await auth.api.getToken({
+      headers:await headers()
+    })
     
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/doctor/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/doctor/${id}`,{
+      headers:{
+        authorization: `Bearer ${token}`
+      }
+    });
     const doctor = await res.json();
     
     

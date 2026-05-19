@@ -40,11 +40,17 @@ export default function BookAppointmentModal({ doctor, isOpen, onClose }) {
       reason: formValues.reason || "",
     };
 
+
+      const {data:tokenData}= await authClient.token()
+        console.log(tokenData)
+
+    
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking`, {
         method: "POST",
         headers: {
           'content-type': 'application/json',
+           authorization : `Bearer ${tokenData?.token}`,
         },
         body: JSON.stringify(bookingData)
       });

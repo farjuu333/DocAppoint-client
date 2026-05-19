@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button, Modal, Input,  TextArea } from "@heroui/react";
 import { Pencil } from "@gravity-ui/icons"; 
 import toast from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
 
 export default function UpdateBooking({ booking }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +23,14 @@ export default function UpdateBooking({ booking }) {
       reason: formValues.reason,
     };
 
+    const {data:tokenData}= await authClient.token()
+            console.log(tokenData)
     
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${booking._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+         authorization : `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(updatedData),
     });
