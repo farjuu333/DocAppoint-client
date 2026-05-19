@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button, Modal, Input,  TextArea } from "@heroui/react";
 import { Pencil } from "@gravity-ui/icons"; 
+import toast from "react-hot-toast";
 
 export default function UpdateBooking({ booking }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,11 +34,11 @@ export default function UpdateBooking({ booking }) {
     const data = await res.json();
     
     if (data.modifiedCount > 0) {
-      alert("Appointment Updated Successfully!");
+      toast.success("Appointment Updated Successfully!");
       setIsOpen(false);
       window.location.reload();
     } else {
-      alert("No changes made or something went wrong.");
+      toast.error("No changes made or something went wrong.");
     }
   };
 

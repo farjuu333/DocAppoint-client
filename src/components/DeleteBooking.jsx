@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { TrashBin } from "@gravity-ui/icons";
 import {AlertDialog, Button} from "@heroui/react";
+import toast from "react-hot-toast";
 
 export function DeleteBooking({bookingId}) {
    console.log(bookingId)
@@ -18,6 +19,7 @@ export function DeleteBooking({bookingId}) {
             }
         })
         const data = await res.json();
+        toast.success("Appointment deleted successfully!")
        window.location.reload();
     }
   return (

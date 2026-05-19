@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import {Envelope} from "@gravity-ui/icons";
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
+import toast from "react-hot-toast";
 import { BiEdit, BiUser } from "react-icons/bi";
 
 export function UpdateUserModal() {
@@ -10,12 +11,22 @@ export function UpdateUserModal() {
         e.preventDefault();
         const name = e.target.name.value;
         const image = e.target.image.value;
-
-        await authClient.updateUser({
+        try {
+          await authClient.updateUser({
     image,
     name,
 })
-    }
+toast.success("Updated profile successfully!");
+          
+        } catch (error) {
+          toast.error("Failed to update profile. Please try again!");
+            console.error(error);
+          
+        }
+
+        
+    } 
+    
   return (
     <Modal>
       <Button variant="secondary"><BiEdit></BiEdit> Update Profile</Button>
@@ -38,8 +49,8 @@ export function UpdateUserModal() {
                     <Input placeholder="Enter your name" />
                   </TextField>
                   <TextField className="w-full" name="image" type="url">
-                    <Label>Image</Label>
-                    <Input placeholder="image URL" />
+                    <Label>Photo (URL)</Label>
+                    <Input placeholder="photo URL" />
                   </TextField>
                   <Modal.Footer>
               

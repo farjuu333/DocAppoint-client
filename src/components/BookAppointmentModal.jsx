@@ -14,6 +14,7 @@ import {
   Select
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 export default function BookAppointmentModal({ doctor, isOpen, onClose }) {
     const {data: session} = authClient.useSession();
@@ -51,14 +52,14 @@ export default function BookAppointmentModal({ doctor, isOpen, onClose }) {
       const data = await res.json();
       
       if (data.insertedId) {
-        alert("You Booked Successfully!");
+         toast.success("You Booked Successfully!");
         onClose(); 
       } else {
-        alert("Something went wrong. Please try again.");
+        toast.error("Something went wrong. Please try again!");
       }
     } catch (error) {
       console.error("Booking Error:", error);
-      alert("Failed to connect to server.");
+      toast.error("Failed to connect server!");
     }
   };
 

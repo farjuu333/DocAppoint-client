@@ -9,7 +9,7 @@ const ProfilePage = () => {
 
     return (
         
-        <div className="w-full flex justify-start items-start text-left">
+        <div className="w-full flex justify-start items-start texat-left">
             <Card className="w-full max-w-xl p-6 border border-gray-100 bg-white shadow-sm rounded-3xl flex flex-col gap-6">
                 
             
