@@ -1,9 +1,20 @@
+import DoctorsCard from '@/components/DoctorsCard';
 import React from 'react';
 
-const AllAppointmentsPage = () => {
+const AllAppointmentsPage = async() => {
+     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/doctor`)
+    const doctors = await res.json()
+    console.log(doctors)
     return (
-        <div>
-            AllAppointmentsPage
+        <div className='container mx-auto mb-20'>
+           <h1>All Appoinments</h1>
+
+            <div className='grid grid-cols-3 gap-5 '>
+                {
+                    doctors.map(doctor => <DoctorsCard key={doctor._id}
+                    doctor={doctor}></DoctorsCard>)
+                }
+            </div> 
         </div>
     );
 };
