@@ -13,8 +13,11 @@ import {
   TextField,
   Select
 } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
 
 export default function BookAppointmentModal({ doctor, isOpen, onClose }) {
+    const {data: session} = authClient.useSession();
+        const user = session?.user;
   
   const { name: doctorName } = doctor || {};
 
@@ -25,6 +28,7 @@ export default function BookAppointmentModal({ doctor, isOpen, onClose }) {
 
    
     const bookingData = {
+        userId:user?.id, 
       userEmail: formValues.userEmail,
       doctorName: doctorName || formValues.doctorName,
       patientName: formValues.patientName,
