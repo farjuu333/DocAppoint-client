@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, Modal, Input,  TextArea } from "@heroui/react";
 import { Pencil } from "@gravity-ui/icons"; 
 
-export default function UpdateBookingModal({ booking }) {
+export default function UpdateBooking({ booking }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleUpdateBooking = async (e) => {

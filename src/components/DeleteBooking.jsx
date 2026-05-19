@@ -4,7 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { TrashBin } from "@gravity-ui/icons";
 import {AlertDialog, Button} from "@heroui/react";
 
-export function BookingCancelAlert({bookingId}) {
+export function DeleteBooking({bookingId}) {
    console.log(bookingId)
     const handleCancelBooking = async()=>{
 

@@ -42,10 +42,8 @@ export function UpdateUserModal() {
                     <Input placeholder="image URL" />
                   </TextField>
                   <Modal.Footer>
-              <Button slot="close" variant="secondary">
-                Cancel
-              </Button>
-              <Button type="submit" slot="close">Save</Button>
+              
+              <Button type="submit" slot="close" className={'w-full bg-cyan-600'}>Save</Button>
             </Modal.Footer>
                  
                 </form>
