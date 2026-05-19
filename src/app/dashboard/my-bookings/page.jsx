@@ -12,6 +12,8 @@
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { Button } from '@heroui/react';
+import { BookingCancelAlert } from '@/components/DeleteBooking';
+import UpdateBookingModal from '@/components/UpdateBooking';
 // import UpdateBookingModal from '@/components/UpdateBookingModal'; 
 // import { BookingCancelAlert } from '@/components/BookingCancelAlert';
 
@@ -88,13 +90,13 @@ const MyBookingsPage = async () => {
                             </div>
 
                             
-                            {/* <div className='flex items-center gap-3 mt-6 pt-4 border-t border-gray-100'>
+                            <div className='flex items-center gap-3 mt-6 pt-4 border-t border-gray-100'>
                                 
-                                <UpdateBookingModal booking={booking} />
+                                 <UpdateBookingModal booking={booking} /> 
 
                                 
                                 <BookingCancelAlert bookingId={booking._id} />
-                            </div> */}
+                            </div> 
                         </div>
                     ))}
                 </div>

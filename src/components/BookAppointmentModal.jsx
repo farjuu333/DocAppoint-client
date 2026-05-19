@@ -77,7 +77,7 @@ export default function BookAppointmentModal({ doctor, isOpen, onClose }) {
               <Surface variant="default">
                 <form onSubmit={onSubmit} className="p-6 space-y-6">
                   
-                  {/* ডায়নামিক সাব-হেডিং */}
+                  
                   <div className="-mt-2 mb-4">
                     <p className="text-sm font-bold text-slate-600">with {doctorName}</p>
                   </div>
