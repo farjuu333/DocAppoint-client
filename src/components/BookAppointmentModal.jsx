@@ -58,7 +58,7 @@ export default function BookAppointmentModal({ doctor, isOpen, onClose }) {
       const data = await res.json();
       
       if (data.insertedId) {
-         toast.success("You Booked Successfully!");
+         toast.success("Appointment Booked Successfully!");
         onClose(); 
       } else {
         toast.error("Something went wrong. Please try again!");

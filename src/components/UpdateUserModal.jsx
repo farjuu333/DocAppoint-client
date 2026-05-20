@@ -16,7 +16,7 @@ export function UpdateUserModal() {
     image,
     name,
 })
-toast.success("Updated profile successfully!");
+toast.success("Profile Updated successfully!");
           
         } catch (error) {
           toast.error("Failed to update profile. Please try again!");

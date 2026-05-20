@@ -1,6 +1,6 @@
 
 "use client";
-import { useState } from "react"; // Menu toggle er jonno
+import { useState ,useEffect} from "react"; // Menu toggle er jonno
 import { authClient } from "@/lib/auth-client";
 import { Avatar, Button } from "@heroui/react";
 import Link from "next/link";
@@ -9,10 +9,21 @@ import { HiMenuAlt3, HiX } from "react-icons/hi"; // Hamburger icons
 import Logoo from "@/assets/logoo.png"
 import Image from "next/image";
 import { FaHandHoldingMedical } from "react-icons/fa";
-
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false); // Mobile menu state
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [mounted, setMounted] = useState(false); 
+  const { theme, setTheme } = useTheme(); 
+
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+
   const userData = authClient.useSession();
   const user = userData.data?.user;
 
@@ -27,7 +38,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className=" flex-1 flex justify-start items-center gap-1">
             <Image className="" alt="logoo" src={Logoo} height={40} width={40}></Image>
-          <Link href="/" className=" font-bold text-inherit tracking-tight">
+          <Link href="/" className=" font-bold  tracking-tight text-gray-800">
 
             DocAppoint
           </Link>
@@ -35,14 +46,14 @@ const Navbar = () => {
 
         {/* Desktop Navigation (Hidden on Mobile) */}
         <nav className="hidden md:flex items-center justify-center gap-8 flex-1">
-          <NavLink href="/" className=" font-medium ">
+          <NavLink href="/" className=" font-medium text-gray-800">
             Home
           </NavLink>
-          <NavLink href="/all-appointments" className= "font-medium ">
+          <NavLink href="/all-appointments" className= "font-medium text-gray-800">
             All Appointments
           </NavLink>
           
-            <NavLink href="/dashboard" className=" font-medium ">
+            <NavLink href="/dashboard" className=" font-medium text-gray-800 ">
               Dashboard
             </NavLink>
           
@@ -50,6 +61,16 @@ const Navbar = () => {
 
         {/* Right Section: Desktop Auth + Mobile Toggle */}
         <div className="flex-1 flex justify-end items-center gap-4">
+
+          {mounted && (
+    <button
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="p-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-yellow-400 hover:scale-105 transition-all duration-200"
+      aria-label="Toggle Theme"
+    >
+      {theme === "dark" ? <Sun size={18} /> : <Moon size={18} className="text-gray-600" />}
+    </button>
+  )}
           
           {/* Desktop Auth Section */}
           <div className="hidden md:flex items-center gap-3">

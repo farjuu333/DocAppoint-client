@@ -1,4 +1,4 @@
-// src/app/dashboard/layout.jsx
+
 
 export const metadata = {
   title: "Dashboard | DocAppoint",
