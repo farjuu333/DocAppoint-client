@@ -17,7 +17,8 @@ const AllAppointmentsPage = () => {
         ? `${process.env.NEXT_PUBLIC_SERVER_URL}/doctor?search=${searchQuery}`
         : `${process.env.NEXT_PUBLIC_SERVER_URL}/doctor`;
         
-      const res = await fetch(url);
+    //   const res = await fetch(url);
+      const res = await fetch(url, { cache: 'no-store' });
       const data = await res.json();
       setDoctors(data);
     } catch (error) {
