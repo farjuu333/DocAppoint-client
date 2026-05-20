@@ -22,12 +22,12 @@ export const auth = betterAuth({
         },
 
       },
-      advanced: {
-        trustedOrigins: [
-            "https://docappoint-client-lyart.vercel.app",
-            "https://docappoint-client-97w92lbjc-farjana-akters-projects.vercel.app"
-        ]
-    },
+    //   advanced: {
+    //     trustedOrigins: [
+    //         "https://docappoint-client-lyart.vercel.app",
+    //         "https://docappoint-client-97w92lbjc-farjana-akters-projects.vercel.app"
+    //     ]
+    // },
 
        session : {
     cookieCache: {
