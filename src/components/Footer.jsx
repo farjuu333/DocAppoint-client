@@ -4,6 +4,7 @@ import { SlSocialTwitter } from 'react-icons/sl';
 import { FiPhone } from 'react-icons/fi';
 import { FaStethoscope } from 'react-icons/fa'; 
 import Link from 'next/link'; 
+import { FaXTwitter } from 'react-icons/fa6';
 
 
 const Footer = () => {
@@ -31,7 +32,8 @@ const Footer = () => {
                         </a>
                         <a href="#" className="p-2 bg-gray-800/50 hover:bg-[#48C8D0] text-white rounded-full transition-all duration-300">
                             <span className="sr-only">Twitter</span>
-                            <SlSocialTwitter size={20} />
+                            {/* <SlSocialTwitter size={20} /> */}
+                            <FaXTwitter size={20}/>
                         </a>
                         <a href="#" className="p-2 bg-gray-800/50 hover:bg-[#48C8D0] text-white rounded-full transition-all duration-300">
                             <span className="sr-only">LinkedIn</span>
