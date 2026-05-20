@@ -82,7 +82,8 @@ const AllAppointmentsPage = () => {
         </div>
       ) : (
         <div className="text-center text-gray-400 text-sm font-medium my-20">
-          No doctors found with name "{searchTerm}"
+          {/* No doctors found with name "{searchTerm}" */}
+          No doctors found with name "{searchTerm || 'your query'}"
         </div>
       )}
     </div>
