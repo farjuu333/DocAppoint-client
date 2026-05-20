@@ -38,6 +38,7 @@ const LogInPage = () => {
     try {
       await authClient.signIn.social({
         provider: "google",
+        callbackURL: "https://docappoint-client-lyart.vercel.app/",
       });
     } catch (err) {
       toast.error("Google sign-in failed");
