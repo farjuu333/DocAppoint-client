@@ -10,6 +10,8 @@ import { Button } from '@heroui/react';
 import { DeleteBooking } from '@/components/DeleteBooking';
 import UpdateBooking from '@/components/UpdateBooking';
 
+
+
 const MyBookingsPage = () => {
     const { data: session, isPending } = authClient.useSession();
     const [bookings, setBookings] = useState([]);
