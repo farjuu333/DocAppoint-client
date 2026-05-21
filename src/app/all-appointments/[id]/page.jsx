@@ -12,8 +12,16 @@ export async function generateMetadata({ params }) {
     const { id } = await params;
 
     try {
+
+        const sessionToken = await auth.api.getToken({
+            headers: await headers()
+        });
+        const token = sessionToken?.token;
         
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/doctor/${id}`, {
+            headers: {
+                authorization: `Bearer ${token}`
+            },
             next: { revalidate: 60 } 
         });
         
