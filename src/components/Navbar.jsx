@@ -111,9 +111,9 @@ const Navbar = () => {
       {/* Mobile Menu Dropdown */}
       {isOpen && (
         <div className="md:hidden bg-white border-b border-gray-200 px-6 py-4 flex flex-col gap-4 animate-in slide-in-from-top duration-300">
-          <NavLink href="/" onClick={() => setIsOpen(false)}>Home</NavLink>
-          <NavLink href="/all-appointments" onClick={() => setIsOpen(false)}>All Appointments</NavLink>
-            <NavLink href="/dashboard" onClick={() => setIsOpen(false)}>Dashboard</NavLink>
+          <NavLink href="/" onClick={() => setIsOpen(false)} className={'text-gray-800'}>Home</NavLink>
+          <NavLink href="/all-appointments" onClick={() => setIsOpen(false)} className={'text-gray-800'}>All Appointments</NavLink>
+            <NavLink href="/dashboard" onClick={() => setIsOpen(false)} className={'text-gray-800'}>Dashboard</NavLink>
           <hr />
           {!user ? (
             <div className="flex flex-col gap-2">
