@@ -32,10 +32,10 @@ export async function generateMetadata({ params }) {
         const specialty = doctor?.specialty || "Specialist";
 
         return {
-            title: `Dr. ${doctorName} | ${specialty} - DocAppoint`,
+            title: `${doctorName} | ${specialty} - DocAppoint`,
             description: doctor?.description || `Book an appointment with Dr. ${doctorName}, specializing in ${specialty}.`,
             openGraph: {
-                title: `Dr. ${doctorName} | ${specialty}`,
+                title: `${doctorName} | ${specialty}`,
                 description: doctor?.description,
                 images: doctor?.image ? [{ url: doctor.image }] : [],
             },
